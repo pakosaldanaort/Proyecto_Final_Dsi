@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="432.0" prefWidth="733.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="proyecto_final.FXMLDocumentController">
+    <children>
+      <MenuBar prefHeight="29.0" prefWidth="733.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Tours">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#optionAddTour" text="Añadir" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar" />
+                  <MenuItem mnemonicParsing="false" text="Editar" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Paquetes">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#optionGeneratePaquete" text="Crear" />
+                  <MenuItem mnemonicParsing="false" text="Paquetes Disponibles" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Ayuda">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Acerca De" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="hijoPrincipal" layoutY="29.0" prefHeight="403.0" prefWidth="733.0">
+         <children>
+            <AnchorPane fx:id="paneInicio" prefHeight="403.0" prefWidth="733.0" style="-fx-background-color: #FFFFFF;">
+               <children>
+                  <ImageView fitHeight="230.0" fitWidth="425.0" layoutX="175.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/img/mexica-tours.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="addTour" prefHeight="403.0" prefWidth="733.0" visible="false">
+               <children>
+                  <Label layoutX="294.0" layoutY="29.0" prefHeight="36.0" prefWidth="145.0" text="Añadir Tour">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tourName" layoutX="214.0" layoutY="103.0" prefHeight="27.0" prefWidth="249.0" />
+                  <TextField fx:id="tourDuration" layoutX="214.0" layoutY="144.0" prefHeight="27.0" prefWidth="249.0" />
+                  <TextField fx:id="tourPrice" layoutX="137.0" layoutY="188.0" />
+                  <Label layoutX="91.0" layoutY="108.0" text="Nombre  del Tour: " />
+                  <Label layoutX="90.0" layoutY="149.0" text="Duracion (Horas) : " />
+                  <Label layoutX="90.0" layoutY="193.0" text="Precio: " />
+                  <Button layoutX="294.0" layoutY="263.0" mnemonicParsing="false" onMouseClicked="#addTour" text="Guardar" />
+                  <Button layoutX="380.0" layoutY="263.0" mnemonicParsing="false" onMouseClicked="#cancel" text="Cancelar" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="generatePaquete" prefHeight="403.0" prefWidth="733.0" visible="false">
+               <children>
+                  <Label layoutX="264.0" layoutY="23.0" prefHeight="30.0" prefWidth="205.0" text="Generar Paquete">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="110.0" layoutY="84.0" text="Presupuesto: " />
+                  <Label layoutX="110.0" layoutY="125.0" text="Numero de Lugares a Conocer: " />
+                  <Label layoutX="110.0" layoutY="176.0" text="Dias del Paquete: " />
+                  <TextField fx:id="presupuesto" layoutX="200.0" layoutY="79.0" />
+                  <TextField fx:id="nLugares" layoutX="310.0" layoutY="120.0" />
+                  <TextField fx:id="nDias" layoutX="227.0" layoutY="171.0" />
+                  <Button layoutX="284.0" layoutY="272.0" mnemonicParsing="false" onMouseClicked="#generatePaquete" prefHeight="27.0" prefWidth="85.0" text="Generar" />
+                  <Button layoutX="384.0" layoutY="272.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="85.0" text="Cancelar" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+    </children>
+</AnchorPane>
