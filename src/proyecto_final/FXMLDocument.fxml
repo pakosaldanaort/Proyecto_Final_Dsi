@@ -8,21 +8,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="432.0" prefWidth="733.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="proyecto_final.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="432.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto_final.FXMLDocumentController">
     <children>
       <MenuBar prefHeight="29.0" prefWidth="733.0">
         <menus>
           <Menu mnemonicParsing="false" text="Tours">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#optionAddTour" text="Añadir" />
-                  <MenuItem mnemonicParsing="false" text="Eliminar" />
-                  <MenuItem mnemonicParsing="false" text="Editar" />
+                  <MenuItem mnemonicParsing="false" onAction="#optionShowTours" text="Ver Tours" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Paquetes">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#optionGeneratePaquete" text="Crear" />
-                  <MenuItem mnemonicParsing="false" text="Paquetes Disponibles" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Ayuda">
@@ -51,13 +49,16 @@
                      </font>
                   </Label>
                   <TextField fx:id="tourName" layoutX="214.0" layoutY="103.0" prefHeight="27.0" prefWidth="249.0" />
-                  <TextField fx:id="tourDuration" layoutX="214.0" layoutY="144.0" prefHeight="27.0" prefWidth="249.0" />
+                  <TextField fx:id="horas" layoutX="157.0" layoutY="144.0" prefHeight="27.0" prefWidth="67.0" />
                   <TextField fx:id="tourPrice" layoutX="137.0" layoutY="188.0" />
                   <Label layoutX="91.0" layoutY="108.0" text="Nombre  del Tour: " />
-                  <Label layoutX="90.0" layoutY="149.0" text="Duracion (Horas) : " />
+                  <Label layoutX="90.0" layoutY="149.0" text="Duracion : " />
                   <Label layoutX="90.0" layoutY="193.0" text="Precio: " />
                   <Button layoutX="294.0" layoutY="263.0" mnemonicParsing="false" onMouseClicked="#addTour" text="Guardar" />
                   <Button layoutX="380.0" layoutY="263.0" mnemonicParsing="false" onMouseClicked="#cancel" text="Cancelar" />
+                  <Label layoutX="227.0" layoutY="149.0" text="Horas" />
+                  <TextField fx:id="minutos" layoutX="271.0" layoutY="144.0" prefHeight="27.0" prefWidth="67.0" />
+                  <Label layoutX="348.0" layoutY="149.0" text="Minutos" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="generatePaquete" prefHeight="403.0" prefWidth="733.0" visible="false">
@@ -75,6 +76,50 @@
                   <TextField fx:id="nDias" layoutX="227.0" layoutY="171.0" />
                   <Button layoutX="284.0" layoutY="272.0" mnemonicParsing="false" onMouseClicked="#generatePaquete" prefHeight="27.0" prefWidth="85.0" text="Generar" />
                   <Button layoutX="384.0" layoutY="272.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="85.0" text="Cancelar" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="verTours" prefHeight="403.0" prefWidth="733.0" visible="false">
+               <children>
+                  <TableView fx:id="table" layoutX="15.0" layoutY="58.0" prefHeight="338.0" prefWidth="703.0">
+                    <columns>
+                      <TableColumn fx:id="tNombre" prefWidth="396.0" text="Nombre" />
+                      <TableColumn fx:id="tPrecio" prefWidth="154.0" text="Precio" />
+                        <TableColumn fx:id="tDuracion" prefWidth="152.0" text="Duracion" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="254.0" layoutY="14.0" prefHeight="36.0" prefWidth="226.0" text="Tours Disponibles" textAlignment="CENTER">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="46.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#cancel" text="Cancelar" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="verToursR" layoutY="5.0" prefHeight="403.0" prefWidth="733.0" visible="false">
+               <children>
+                  <TableView fx:id="table2" layoutX="15.0" layoutY="58.0" prefHeight="244.0" prefWidth="703.0">
+                     <columns>
+                        <TableColumn fx:id="tNombre2" prefWidth="396.0" text="Nombre" />
+                        <TableColumn fx:id="tPrecio2" prefWidth="154.0" text="Precio" />
+                        <TableColumn fx:id="tDuracion2" prefWidth="152.0" text="Duracion" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="254.0" layoutY="14.0" prefHeight="36.0" prefWidth="242.0" text="Paquete Resultante" textAlignment="CENTER">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="46.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#cancel" text="Cancelar" />
+                  <Label layoutX="390.0" layoutY="318.0" prefHeight="20.0" prefWidth="111.0" text="Costo Total: ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="costo" layoutX="487.0" layoutY="318.0" prefHeight="20.0" prefWidth="111.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>

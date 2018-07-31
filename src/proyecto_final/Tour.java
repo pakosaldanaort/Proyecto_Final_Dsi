@@ -6,6 +6,7 @@
 package proyecto_final;
 
 import java.io.Serializable;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
@@ -16,16 +17,25 @@ public class Tour implements Serializable {
     
     public String tourName;
     public double price;
-    public double duracion;
-
-    public Tour(String tourName, double price, double duracion) {
+    public int horas;
+    public int minutos;
+    
+    
+    public Tour(String tourName, double price, int horas,int minutos) {
         this.tourName = tourName;
         this.price = price;
-        this.duracion = duracion;
+        this.horas = horas;
+        this.minutos = minutos;
+
+
+       
     }
 
-    public Tour() {
-    }
+    
+    
+    
+
+   
 
     public String getTourName() {
         return tourName;
@@ -43,17 +53,26 @@ public class Tour implements Serializable {
         this.price = price;
     }
 
-    public double getDuracion() {
-        return duracion;
+    public int getHoras() {
+        return horas;
     }
 
-    public void setDuracion(double duracion) {
-        this.duracion = duracion;
+    public void setHoras(int horas) {
+        this.horas = horas;
     }
 
+    public int getMinutos() {
+        return minutos;
+    }
+
+    public void setMinutos(int minutos) {
+        this.minutos = minutos;
+    }
+
+    
     @Override
     public String toString() {
-        return "Tour {" + "Nombre=" + tourName + ", Precio =" + price + ", Duracion=" + duracion + '}';
+        return "Tour {" + "Nombre=" + tourName + ", Precio =" + price + ", Duracion= " + horas + " horas "+minutos+" minutos}";
     }
     
     

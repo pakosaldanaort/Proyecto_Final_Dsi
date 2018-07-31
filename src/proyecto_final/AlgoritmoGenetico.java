@@ -27,7 +27,7 @@ public class AlgoritmoGenetico {
         this.nLugares = nLugares;
         this.diasPaquete = diasPaquete;
         this.precioMax = precioMax;
-        precioMinimo = precioMax;
+        precioMinimo = precioMax*2;
         
         
     }
@@ -40,7 +40,8 @@ public class AlgoritmoGenetico {
         for (int i = 0; i < nLugares; i++) {
             temp=new ArrayList<Tour>();
             for (int j = 0; j < nLugares; j++) {
-                random = (int) (Math.random() * maxTours-1);
+                random = (int) (Math.random() * maxTours);
+
                 
                 
                 temp.add(tours.get(random));
@@ -69,29 +70,39 @@ public class AlgoritmoGenetico {
             precioPaquete+= temp.getPrice();
             
         }
+        double part = this.precioMax/8;
         
-        precioPaquete = precioPaquete / tours.size();
+        
+        
+        fitness= (precioMax - precioPaquete)/10;
         
         if(precioPaquete == this.precioMax){
-            fitness= fitness + 50;
-            if(precioPaquete < this.precioMinimo){
-                this.precioMinimo = precioPaquete;
-                fitness+= 30;
-            }
+            fitness= fitness +600;
+            
+        }else if(precioPaquete >= part*7 && precioPaquete<this.precioMax){
+            fitness= fitness +520;
         }
+        else if(precioPaquete >= part*6 && precioPaquete<this.precioMax){
+            fitness= fitness +220;
+        }
+        else if(precioPaquete <= part*5){
+            fitness= fitness - precioPaquete;
+        }
+        
+        /*
         else if(precioPaquete < this.precioMax) {
             fitness= fitness + 100;
-            if(precioPaquete < this.precioMinimo){
-                this.precioMinimo = precioPaquete;
-                fitness+= 30;
-            }
+            
         }
         else if(precioPaquete < this.precioMax/2){
-            fitness = fitness-70;
+            fitness = fitness-170;
         }
+
         else{
-            fitness = fitness-30;
-        }
+            fitness = fitness-70;
+        }*/
+        
+        
         String tourName;
         int cont;
         for (int i = 0; i < tours.size(); i++) {
@@ -100,7 +111,7 @@ public class AlgoritmoGenetico {
             
             for (int j = 0; j < tours.size(); j++) {
                 if(tourName.equals(tours.get(j).getTourName()) && i!=j){
-                    fitness = fitness-25;
+                    fitness = fitness-250;
                     
                     
                 }
@@ -110,7 +121,7 @@ public class AlgoritmoGenetico {
         }
         
        
-        System.out.println(fitness);
+
         return fitness;
     }
     
@@ -142,6 +153,7 @@ public class AlgoritmoGenetico {
         }
         
         
+        
         /*double maxFitness= croms.get(0).getFitness();
         double currentFitness=0;
         for(int i=0; i < croms.size(); i++){
@@ -152,6 +164,80 @@ public class AlgoritmoGenetico {
             }
         }*/
         return aux;
+        
+    }
+    
+    public ArrayList<Cromosoma> crossover(ArrayList<Cromosoma> croms){
+
+         double ram;
+         ArrayList<Tour> padre = (ArrayList<Tour>) croms.get(0).getCromosoma().clone();
+         ArrayList<Tour> madre = (ArrayList<Tour>) croms.get(0).getCromosoma().clone();
+
+         ArrayList<Tour> hijo1 = new ArrayList<Tour>();
+         ArrayList<Tour> hijo2 = new ArrayList<Tour>();
+
+         Cromosoma aux1 = new Cromosoma();
+         Cromosoma aux2 = new Cromosoma();
+         ArrayList<Cromosoma> children = new ArrayList<Cromosoma>();
+ 
+         for (int j = 0; j < padre.size(); j++) {
+             ram=Math.random();
+             if(ram<0.5){
+                hijo1.add(j,padre.get(j));
+
+                hijo2.add(j,madre.get(j));
+
+            }
+            else{
+                 
+                hijo1.add(j,madre.get(j));
+
+                hijo2.add(j,padre.get(j));
+
+                
+            }
+
+         }
+         aux1.setCromosoma(hijo1);
+         aux2.setCromosoma(hijo2);
+         
+         children.add(aux1);
+         children.add(aux2);
+
+         
+         return children;
+
+     }
+    
+    public void mutation(ArrayList<Cromosoma> children,ArrayList<Tour> tours) {
+        ArrayList <Tour> m  = new ArrayList <Tour>();
+        double random;
+        int random2;
+        for(int i=0; i< children.size();i++){
+            m = children.get(i).getCromosoma();
+   
+            for(int j=0;j< m.size(); j++){
+                 random =  Math.random() ; 
+                 if(random<0.5){
+                     random2 = (int) (Math.random() * maxTours);
+
+                     Tour temp = tours.get(random2);
+                     if(!temp.tourName.equals(m.get(j).tourName)){
+                         m.set(j, temp);
+                         
+                     }
+                     
+                     
+                 }
+            }
+
+            
+            children.get(i).setCromosoma(m);
+            
+            
+            
+            
+        }
         
     }
     
